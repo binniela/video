@@ -1,101 +1,142 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+import { useEffect, useRef } from 'react'
+import VideoBackground from '../components/VideoBackground'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+
+export default function LandingPage() {
+  const videoSrc = '/videos/background.mp4' // Replace with your video path
+  const fallbackImageSrc = '/images/fallback.jpg' // Optional: Replace with a fallback image path
+  const heroRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up')
+        }
+      })
+    }, observerOptions)
+
+    document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el))
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="relative min-h-screen">
+      <Navbar />
+      <div ref={heroRef} className="relative h-screen">
+        <VideoBackground videoSrc={videoSrc} fallbackImageSrc={fallbackImageSrc} />
+        <div className="absolute inset-0 flex items-center z-10">
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl">
+              <h1 className="text-6xl font-bold leading-tight mb-4 text-black">
+                Empowering<br />Your<br />Journey
+              </h1>
+              <p className="text-xl mb-8 text-gray-700">
+                Auxilium is your partner in navigating the complexities of modern business. We provide innovative solutions to help you thrive in today&apos;s dynamic environment.
+              </p>
+              <div className="flex space-x-4">
+                <a
+                  href="https://main.d2nee70q3udcww.amplifyapp.com/"
+                  className="px-6 py-3 text-base font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                >
+                  Get Started
+                </a>
+                <a
+                  href="https://main.d2nee70q3udcww.amplifyapp.com/"
+                  className="px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Learn More
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      <section id="about" className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold mb-8 text-center scroll-animate">About Our Company</h2>
+          <p className="text-xl text-gray-700 mb-8 scroll-animate">
+            Auxilium is dedicated to empowering businesses with cutting-edge solutions. Our team of experts works tirelessly to develop innovative strategies that drive growth and success in today&apos;s fast-paced market.
+          </p>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-md scroll-animate">
+              <h3 className="text-2xl font-semibold mb-4">Our Mission</h3>
+              <p>To provide unparalleled support and innovative solutions to businesses of all sizes.</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md scroll-animate">
+              <h3 className="text-2xl font-semibold mb-4">Our Vision</h3>
+              <p>To be the leading force in business empowerment and technological advancement.</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md scroll-animate">
+              <h3 className="text-2xl font-semibold mb-4">Our Values</h3>
+              <p>Innovation, integrity, collaboration, and customer-centricity guide everything we do.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="py-20">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold mb-8 text-center scroll-animate">Our Services</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-md scroll-animate">
+              <h3 className="text-2xl font-semibold mb-4">Business Consulting</h3>
+              <p>Expert advice to optimize your business processes and increase efficiency.</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md scroll-animate">
+              <h3 className="text-2xl font-semibold mb-4">Technology Solutions</h3>
+              <p>Cutting-edge tech implementations to keep you ahead of the competition.</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md scroll-animate">
+              <h3 className="text-2xl font-semibold mb-4">Market Analysis</h3>
+              <p>In-depth market research to inform your strategic decisions.</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md scroll-animate">
+              <h3 className="text-2xl font-semibold mb-4">Digital Transformation</h3>
+              <p>Comprehensive digital strategies to revolutionize your business model.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold mb-8 text-center scroll-animate">Got a question?</h2>
+          <div className="space-y-4">
+            <FaqItem question="Can I use Auxilium for free?" />
+            <FaqItem question="Is uplading images allowed?" />
+            <FaqItem question="How easy is it to start using Auxilium?" />
+            <FaqItem question="Is my data safe with Auxilium?" />
+            <FaqItem question="Where is Auxilium data stored?" />
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
-  );
+  )
+}
+
+function FaqItem({ question }: { question: string }) {
+  return (
+    <div className="border-b border-gray-200 pb-4">
+      <button className="flex justify-between items-center w-full text-left">
+        <span className="text-lg font-medium text-gray-900">{question}</span>
+        <svg className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+    </div>
+  )
 }
