@@ -6,8 +6,8 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 export default function LandingPage() {
-  const videoSrc = '/videos/background.mp4' // Replace with your video path
-  const fallbackImageSrc = '/images/fallback.jpg' // Optional: Replace with a fallback image path
+  const videoSrc = '/videos/background.mp4' 
+  const fallbackImageSrc = '/images/fallback.jpg' 
   const heroRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
