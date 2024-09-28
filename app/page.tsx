@@ -46,13 +46,13 @@ export default function LandingPage() {
               </p>
               <div className="flex space-x-4">
                 <a
-                  href="https://main.d2nee70q3udcww.amplifyapp.com/"
+                  href="https://main.d2ubsc4sb3luey.amplifyapp.com/"
                   className="px-6 py-3 text-base font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   Get Started
                 </a>
                 <a
-                  href="https://main.d2nee70q3udcww.amplifyapp.com/"
+                  href="https://main.d2ubsc4sb3luey.amplifyapp.com/"
                   className="px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   Learn More
